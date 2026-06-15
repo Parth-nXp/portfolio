@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import SiteNav from "../components/SiteNav";
+import SocialFooter from "../components/SocialFooter";
 
 // ==========================================
 // DATA PAYLOADS
@@ -160,44 +161,134 @@ const conferences = [
   }
 ];
 
+const bookChapters = [
+  {
+    title: "HMM Model for Brain Tumor Detection and Classification.",
+    authors: "Parth Sharma and Rakesh Sharma",
+    publisher: "Springer Intelligent Computing and Communication Systems",
+    year: "2021",
+    link: "https://doi.org/10.1007/978-981-16-1295-4_35"
+  }
+];
+
+const researchStats = [
+  { label: "Patents", value: patents.length, accent: "text-purple-300" },
+  { label: "Journals", value: journals.length, accent: "text-blue-300" },
+  { label: "Books", value: bookChapters.length, accent: "text-orange-300" },
+  { label: "Conferences", value: conferences.length, accent: "text-emerald-300" }
+];
+
+const scholarUrl = "https://scholar.google.com/citations?user=Dw0a4zgAAAAJ&hl=en&authuser=1";
+
 export default function Research() {
   const [activeTab, setActiveTab] = useState("patents");
 
   return (
-    <main className="min-h-screen bg-[#0d1117] text-white font-sans selection:bg-purple-500/30 pb-24">
+    <main className="min-h-screen overflow-hidden bg-[#0d1117] text-white font-sans selection:bg-purple-500/30 pb-24">
       <SiteNav />
 
       {/* ================= HERO HEADER ================= */}
-      <header className="max-w-5xl mx-auto px-8 pb-12 pt-36 relative">
-        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none" />
-        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
-          Research & <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">Publications.</span>
-        </h1>
-        <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light max-w-3xl">
-          Advancing the frontier of Machine Learning through innovative algorithms, resilient architecture, and robust optimization techniques.
-        </p>
+      <header className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-8 pb-16 pt-36 lg:grid-cols-[1fr_0.8fr]">
+        <div className="absolute left-1/2 top-24 h-[620px] w-[620px] -translate-x-1/2 rounded-full bg-purple-600/10 blur-[150px] pointer-events-none" />
+        <div className="absolute right-0 top-28 h-[420px] w-[420px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none" />
+
+        <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="relative z-10">
+          <div className="mb-6 flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-purple-400/30 bg-purple-500/10 shadow-[0_0_30px_-15px_rgba(168,85,247,0.9)]">
+              <FileText className="text-purple-300" size={20} />
+            </div>
+            <span className="font-mono text-sm uppercase tracking-[0.25em] text-purple-300">Research Kernel</span>
+          </div>
+          <h1 className="mb-6 text-5xl font-extrabold tracking-tight md:text-6xl">
+            Research &
+            <span className="block bg-gradient-to-r from-purple-400 via-blue-400 to-emerald-400 bg-clip-text text-transparent">
+              Publications.
+            </span>
+          </h1>
+          <p className="max-w-3xl text-lg font-light leading-relaxed text-gray-400 md:text-xl">
+            Advancing machine learning through robust optimization, distributed intelligence, adaptive algorithms, multimodal AI, and production-relevant model systems.
+          </p>
+
+          <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 md:grid-cols-4">
+            {researchStats.map((stat) => (
+              <div key={stat.label} className="rounded-xl border border-gray-800 bg-[#161b22]/80 p-4">
+                <p className={`font-mono text-3xl font-black ${stat.accent}`}>{stat.value}</p>
+                <p className="mt-1 font-mono text-xs uppercase tracking-wider text-gray-500">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.15 }} className="relative z-10">
+          <div className="relative overflow-hidden rounded-2xl border border-gray-800 bg-[#101722] p-6 shadow-[0_0_70px_-35px_rgba(168,85,247,0.85)]">
+            <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full border border-purple-400/10" />
+            <div className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/10" />
+            <div className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-emerald-400/10" />
+
+            <div className="relative z-10 rounded-2xl border border-purple-400/20 bg-[#0d1117]/90 p-6 text-center">
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-purple-400/30 bg-purple-500/10">
+                <BrainCircuit className="text-purple-300" size={30} />
+              </div>
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-purple-300">Research Graph</p>
+              <h2 className="mt-3 text-2xl font-bold">Algorithms to AI Systems</h2>
+              <a
+                href={scholarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-5 block rounded-2xl border border-blue-400/20 bg-blue-500/10 p-4 text-left transition-all hover:border-blue-300/40 hover:bg-blue-500/15"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-blue-300">Google Scholar</p>
+                    <p className="mt-1 text-lg font-black text-white">Live Citation Count</p>
+                  </div>
+                  <ExternalLink className="text-blue-300 transition-transform group-hover:translate-x-1" size={18} />
+                </div>
+                <div className="mt-4 flex items-center justify-between rounded-xl border border-gray-800 bg-[#0d1117]/80 px-4 py-3">
+                  <span className="font-mono text-xs uppercase tracking-widest text-gray-500">source</span>
+                  <span className="font-mono text-sm font-bold text-blue-300">opens live profile</span>
+                </div>
+              </a>
+            </div>
+
+            <div className="relative z-10 mt-6 grid grid-cols-2 gap-3">
+              {["Patents", "Journals", "Books", "Conferences"].map((label) => (
+                <div key={label} className="rounded-xl border border-gray-800 bg-[#0d1117] p-4 text-center font-mono text-sm font-bold uppercase tracking-widest text-gray-300">
+                  {label}
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </header>
 
       {/* ================= TAB NAVIGATION ================= */}
       <section className="max-w-5xl mx-auto px-8 mb-12 relative z-10">
-        <div className="flex flex-wrap gap-4 border-b border-gray-800 pb-4">
+        <div className="flex flex-wrap gap-3 rounded-full border border-gray-800/70 bg-[#0b1220]/70 p-2 shadow-[0_0_35px_-25px_rgba(168,85,247,0.9)] backdrop-blur">
           <button
             onClick={() => setActiveTab("patents")}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-mono text-sm transition-all ${activeTab === "patents" ? "bg-purple-500/10 text-purple-400 border border-purple-500/30" : "text-gray-400 hover:text-white hover:bg-gray-800/50"}`}
+            className={`flex items-center space-x-2 px-6 py-3 rounded-full font-mono text-sm transition-all ${activeTab === "patents" ? "bg-purple-500/10 text-purple-300 border border-purple-500/30 shadow-[0_0_20px_-14px_rgba(168,85,247,0.9)]" : "text-gray-400 hover:text-white hover:bg-gray-800/70"}`}
           >
             <Copyright size={18} />
             <span>Patents ({patents.length})</span>
           </button>
           <button
             onClick={() => setActiveTab("journals")}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-mono text-sm transition-all ${activeTab === "journals" ? "bg-blue-500/10 text-blue-400 border border-blue-500/30" : "text-gray-400 hover:text-white hover:bg-gray-800/50"}`}
+            className={`flex items-center space-x-2 px-6 py-3 rounded-full font-mono text-sm transition-all ${activeTab === "journals" ? "bg-blue-500/10 text-blue-300 border border-blue-500/30 shadow-[0_0_20px_-14px_rgba(59,130,246,0.9)]" : "text-gray-400 hover:text-white hover:bg-gray-800/70"}`}
           >
             <FileText size={18} />
             <span>Journals ({journals.length})</span>
           </button>
           <button
+            onClick={() => setActiveTab("books")}
+            className={`flex items-center space-x-2 px-6 py-3 rounded-full font-mono text-sm transition-all ${activeTab === "books" ? "bg-orange-500/10 text-orange-300 border border-orange-500/30 shadow-[0_0_20px_-14px_rgba(249,115,22,0.9)]" : "text-gray-400 hover:text-white hover:bg-gray-800/70"}`}
+          >
+            <FileText size={18} />
+            <span>Book Chapters ({bookChapters.length})</span>
+          </button>
+          <button
             onClick={() => setActiveTab("conferences")}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-mono text-sm transition-all ${activeTab === "conferences" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30" : "text-gray-400 hover:text-white hover:bg-gray-800/50"}`}
+            className={`flex items-center space-x-2 px-6 py-3 rounded-full font-mono text-sm transition-all ${activeTab === "conferences" ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 shadow-[0_0_20px_-14px_rgba(16,185,129,0.9)]" : "text-gray-400 hover:text-white hover:bg-gray-800/70"}`}
           >
             <Globe2 size={18} />
             <span>Conferences ({conferences.length})</span>
@@ -210,10 +301,11 @@ export default function Research() {
 
         {/* PATENTS TAB */}
         {activeTab === "patents" && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {patents.map((patent, index) => (
-              <div key={index} className="bg-[#161b22] border border-gray-800 rounded-xl p-8 hover:border-purple-500/30 transition-colors group flex flex-col">
-                <div className="mb-4 bg-[#0d1117] w-12 h-12 rounded-lg flex items-center justify-center border border-gray-800">
+              <div key={index} className="group relative flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-[#101722] p-8 transition-all hover:-translate-y-1 hover:border-purple-500/40 hover:shadow-[0_0_45px_-24px_rgba(168,85,247,0.75)]">
+                <div className="absolute right-5 top-5 font-mono text-xs text-gray-700">0{index + 1}</div>
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-gray-800 bg-[#0d1117] shadow-[0_0_30px_-18px_rgba(168,85,247,0.8)]">
                   {patent.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-200 group-hover:text-white leading-snug">{patent.title}</h3>
@@ -231,8 +323,8 @@ export default function Research() {
         {activeTab === "journals" && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
             {journals.map((journal, index) => (
-              <div key={index} className="bg-[#161b22] border border-gray-800 rounded-xl p-8 hover:border-blue-500/30 transition-all group flex flex-col md:flex-row gap-6 md:items-stretch">
-                <div className="hidden md:flex flex-col items-center justify-center min-w-[80px] border-r border-gray-800 pr-6">
+              <div key={index} className="group flex flex-col gap-6 overflow-hidden rounded-2xl border border-gray-800 bg-[#101722] p-8 transition-all hover:-translate-y-1 hover:border-blue-500/40 hover:shadow-[0_0_45px_-24px_rgba(59,130,246,0.75)] md:flex-row md:items-stretch">
+                <div className="hidden min-w-[80px] flex-col items-center justify-center border-r border-gray-800 pr-6 md:flex">
                   <span className="text-2xl font-black text-gray-700">{journal.year}</span>
                 </div>
                 <div className="flex-grow">
@@ -246,31 +338,38 @@ export default function Research() {
                   )}
                   <p className="text-sm text-gray-400 mb-4">{journal.authors}</p>
                   <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-                    <span className="px-2 py-1 bg-blue-500/10 text-blue-300 border border-blue-500/20 rounded">IF: {journal.if}</span>
+                    <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20">IF: {journal.if}</span>
                     <span className="text-gray-500 italic">{journal.journal}</span>
                     <span className="text-gray-400 md:hidden">{journal.year}</span>
                   </div>
                 </div>
               </div>
             ))}
+          </motion.div>
+        )}
 
-            {/* Book Chapter Included in Journals for cleanliness */}
-            <div className="bg-[#161b22] border border-gray-800 rounded-xl p-8 hover:border-orange-500/30 transition-all group flex flex-col md:flex-row gap-6 md:items-stretch">
-              <div className="hidden md:flex flex-col items-center justify-center min-w-[80px] border-r border-gray-800 pr-6">
-                <span className="text-2xl font-black text-gray-700">2021</span>
-              </div>
-              <div className="flex-grow">
-                <a href="https://doi.org/10.1007/978-981-16-1295-4_35" target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-2 mb-2 group/link">
-                  <h3 className="text-lg md:text-xl font-bold text-gray-200 leading-snug group-hover/link:text-orange-400 transition-colors">HMM Model for Brain Tumor Detection and Classification.</h3>
-                  <ExternalLink className="text-gray-600 mt-1 flex-shrink-0 group-hover/link:text-orange-400 transition-colors" size={18} />
-                </a>
-                <p className="text-sm text-gray-400 mb-4">Parth Sharma and Rakesh Sharma</p>
-                <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-                  <span className="px-2 py-1 bg-orange-500/10 text-orange-300 border border-orange-500/20 rounded">Book Chapter</span>
-                  <span className="text-gray-500 italic">Springer Intelligent Computing and Communication Systems</span>
+        {/* BOOK CHAPTERS TAB */}
+        {activeTab === "books" && (
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+            {bookChapters.map((chapter) => (
+              <div key={chapter.link} className="group flex flex-col gap-6 overflow-hidden rounded-2xl border border-gray-800 bg-[#101722] p-8 transition-all hover:-translate-y-1 hover:border-orange-500/40 hover:shadow-[0_0_45px_-24px_rgba(249,115,22,0.75)] md:flex-row md:items-stretch">
+                <div className="hidden min-w-[80px] flex-col items-center justify-center border-r border-gray-800 pr-6 md:flex">
+                  <span className="text-2xl font-black text-gray-700">{chapter.year}</span>
+                </div>
+                <div className="flex-grow">
+                  <a href={chapter.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-2 mb-2 group/link">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-200 leading-snug group-hover/link:text-orange-400 transition-colors">{chapter.title}</h3>
+                    <ExternalLink className="text-gray-600 mt-1 flex-shrink-0 group-hover/link:text-orange-400 transition-colors" size={18} />
+                  </a>
+                  <p className="text-sm text-gray-400 mb-4">{chapter.authors}</p>
+                  <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
+                    <span className="px-3 py-1 bg-orange-500/10 text-orange-300 border border-orange-500/20 rounded-full">Book Chapter</span>
+                    <span className="text-gray-500 italic">{chapter.publisher}</span>
+                    <span className="text-gray-400 md:hidden">{chapter.year}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </motion.div>
         )}
 
@@ -278,7 +377,7 @@ export default function Research() {
         {activeTab === "conferences" && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
             {conferences.map((conf, index) => (
-              <div key={index} className="bg-[#161b22] border border-gray-800 rounded-lg p-6 hover:border-emerald-500/30 transition-all flex flex-col md:flex-row gap-6">
+              <div key={index} className="flex flex-col gap-6 overflow-hidden rounded-2xl border border-gray-800 bg-[#101722] p-6 transition-all hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-[0_0_45px_-24px_rgba(16,185,129,0.75)] md:flex-row">
                 <div className="hidden md:flex flex-col items-center justify-center min-w-[80px] border-r border-gray-800 pr-6">
                   <span className="text-2xl font-black text-gray-700">{conf.year}</span>
                 </div>
@@ -299,6 +398,7 @@ export default function Research() {
         )}
 
       </section>
+      <SocialFooter />
     </main>
   );
 }
