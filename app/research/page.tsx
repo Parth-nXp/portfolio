@@ -363,7 +363,14 @@ export default function Research() {
                   </a>
                   <p className="text-sm text-gray-400 mb-4">{chapter.authors}</p>
                   <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-                    <span className="px-3 py-1 bg-orange-500/10 text-orange-300 border border-orange-500/20 rounded-full">Book Chapter</span>
+                    <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/25 bg-orange-500/10 px-3 py-1.5 shadow-[0_0_22px_-12px_rgba(249,115,22,0.9)]">
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-orange-300 text-[11px] font-black leading-none text-[#101722]">
+                        S
+                      </span>
+                      <span className="font-serif text-sm font-semibold normal-case tracking-normal text-orange-200">
+                        Springer
+                      </span>
+                    </span>
                     <span className="text-gray-500 italic">{chapter.publisher}</span>
                     <span className="text-gray-400 md:hidden">{chapter.year}</span>
                   </div>

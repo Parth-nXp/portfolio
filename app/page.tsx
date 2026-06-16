@@ -163,8 +163,8 @@ export default function Home() {
                     <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 font-mono text-xs text-emerald-300">ai mode</span>
                   </div>
                   <div className="space-y-3 font-mono text-sm">
-                    <p className="text-gray-500">&gt; <span className="text-gray-200">ML Ph.D.</span> @ <span className="text-purple-300">IIT Roorkee</span></p>
                     <p className="text-gray-500">&gt; <span className="text-blue-300">AI Data Scientist</span> @ <span className="text-cyan-300">Teradata</span></p>
+                    <p className="text-gray-500">&gt; <span className="text-gray-200">ML Ph.D.</span> @ <span className="text-purple-300">IIT Roorkee</span></p>
                     <p className="text-gray-500">&gt; builds: <span className="text-gray-200">LLM systems, GenAI pipelines, scalable ML</span></p>
                     <p className="text-cyan-300">&gt; shipping models from research signal to production impact</p>
                   </div>
