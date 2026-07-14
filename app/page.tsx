@@ -50,6 +50,12 @@ const skillsData = [
 
 const publications = [
   {
+    title: "Privacy-preserving distributed learning: Techniques, applications, and future challenges",
+    authors: "P. Sharma et. al.",
+    journal: "IEEE Potentials",
+    doi: "https://doi.org/10.1109/MPOT.2026.3702285"
+  },
+  {
     title: "Modelling Behaviour of Sensors using a Novel beta-divergence based Adaptive Filter",
     authors: "P. Sharma et. al.",
     journal: "IEEE Sensors Journal",
@@ -78,6 +84,8 @@ const systemStats = [
 export default function Home() {
   const roleText = "AI Data Scientist @ Teradata";
   const [typedRole, setTypedRole] = useState("");
+  const [profileVisits, setProfileVisits] = useState<number | null>(null);
+  const [visitSource, setVisitSource] = useState("syncing");
 
   useEffect(() => {
     let index = 0;
@@ -92,6 +100,43 @@ export default function Home() {
     }, 75);
 
     return () => window.clearInterval(typingTimer);
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function syncProfileVisits() {
+      const visitKey = "parth_portfolio_visit_registered";
+      const hasVisited = window.localStorage.getItem(visitKey);
+      const method = hasVisited ? "GET" : "POST";
+
+      if (!hasVisited) {
+        window.localStorage.setItem(visitKey, "true");
+      }
+
+      try {
+        const response = await fetch("/api/profile-visits", {
+          method,
+          cache: "no-store"
+        });
+        const data = (await response.json()) as { count?: number; source?: string };
+
+        if (isMounted) {
+          setProfileVisits(typeof data.count === "number" ? data.count : null);
+          setVisitSource(data.source === "persistent" ? "persistent" : "live session");
+        }
+      } catch {
+        if (isMounted) {
+          setVisitSource("offline");
+        }
+      }
+    }
+
+    syncProfileVisits();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -167,6 +212,33 @@ export default function Home() {
                     <p className="text-gray-500">&gt; <span className="text-gray-200">ML Ph.D.</span> @ <span className="text-purple-300">IIT Roorkee</span></p>
                     <p className="text-gray-500">&gt; builds: <span className="text-gray-200">LLM systems, GenAI pipelines, scalable ML</span></p>
                     <p className="text-cyan-300">&gt; shipping models from research signal to production impact</p>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-cyan-400/20 bg-cyan-500/5 p-4 shadow-[0_0_28px_-22px_rgba(34,211,238,0.9)]">
+                  <div className="mb-3 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-60" />
+                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-300" />
+                      </span>
+                      <span className="font-mono text-xs uppercase tracking-[0.22em] text-cyan-300">profile telemetry</span>
+                    </div>
+                    <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-cyan-200">
+                      live
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-[1fr_auto] items-end gap-4">
+                    <div>
+                      <p className="font-mono text-xs uppercase tracking-widest text-gray-500">profile visits</p>
+                      <p className="mt-1 font-mono text-3xl font-black text-white">
+                        {profileVisits === null ? "--" : profileVisits.toLocaleString()}
+                      </p>
+                    </div>
+                    <div className="text-right font-mono text-xs">
+                      <p className="text-gray-500">source</p>
+                      <p className="mt-1 text-cyan-300">{visitSource}</p>
+                    </div>
                   </div>
                 </div>
 

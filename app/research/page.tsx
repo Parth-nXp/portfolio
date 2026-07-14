@@ -39,6 +39,14 @@ const patents = [
 
 const journals = [
   {
+    title: "Privacy-preserving distributed learning: Techniques, applications, and future challenges.",
+    authors: "Parth Sharma and Pyari Mohan Pradhan",
+    journal: "IEEE Potentials",
+    year: "2026",
+    if: "1.54",
+    link: "https://doi.org/10.1109/MPOT.2026.3702285"
+  },
+  {
     title: "Block Amari Alpha Least Mean Square Algorithm based Channel Estimation.",
     authors: "Shekhar Pratap Singh, Parth Sharma, and Pyari Mohan Pradhan",
     journal: "AEU - International Journal of Electronics and Communications",
