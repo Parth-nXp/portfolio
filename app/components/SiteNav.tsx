@@ -7,6 +7,7 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "About Me", href: "/about" },
   { label: "Research", href: "/research" },
+  { label: "Resources", href: "/resources" },
   { label: "Hobbies", href: "/hobbies" }
 ];
 
@@ -14,9 +15,9 @@ export default function SiteNav() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-gray-800/60 bg-[#0d1117]/80 px-6 py-4 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-6">
-        <Link href="/" aria-label="Home" className="group flex items-center gap-3">
+    <header className="fixed left-0 right-0 top-0 z-50 overflow-hidden border-b border-gray-800/60 bg-[#0d1117]/80 px-4 py-4 backdrop-blur-xl sm:px-6">
+      <nav className="mx-auto flex max-w-7xl items-center gap-3 sm:gap-6">
+        <Link href="/" aria-label="Home" className="group flex shrink-0 items-center gap-3">
           <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-blue-400/30 bg-[#0b1220] shadow-[0_0_35px_-14px_rgba(59,130,246,0.95)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-purple-400/60 group-hover:shadow-[0_0_45px_-12px_rgba(168,85,247,0.95)]">
             <span className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(96,165,250,0.35),transparent_35%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.28),transparent_35%)]" />
             <span className="absolute inset-x-1 top-1 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" />
@@ -31,7 +32,7 @@ export default function SiteNav() {
           </span>
         </Link>
 
-        <div className="flex flex-wrap items-center justify-end gap-2 rounded-full border border-gray-800/70 bg-[#0b1220]/70 p-1 shadow-[0_0_35px_-25px_rgba(59,130,246,0.9)] backdrop-blur">
+        <div className="flex min-w-0 flex-1 flex-nowrap items-center gap-2 overflow-x-auto rounded-full border border-gray-800/70 bg-[#0b1220]/70 p-1 shadow-[0_0_35px_-25px_rgba(59,130,246,0.9)] backdrop-blur [scrollbar-width:none] sm:justify-end [&::-webkit-scrollbar]:hidden">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
 
@@ -39,7 +40,7 @@ export default function SiteNav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative rounded-full px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all ${
+                className={`relative shrink-0 rounded-full px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all ${
                   isActive
                     ? "bg-blue-400/10 text-cyan-200 shadow-[inset_0_0_0_1px_rgba(34,211,238,0.22),0_0_20px_-12px_rgba(34,211,238,0.9)]"
                     : "text-gray-400 hover:bg-gray-800/80 hover:text-gray-100"
